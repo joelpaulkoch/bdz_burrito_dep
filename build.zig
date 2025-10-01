@@ -32,19 +32,16 @@ pub fn build(b: *std.Build) void {
         break :blk b.run(&argv);
     };
 
-    const lib = b.addSharedLibrary(.{
-        .name = "math",
-        .target = target,
-        .optimize = optimize,
-        .link_libc = true,
-    });
-    lib.addCSourceFile(.{
+    const mod = b.createModule(.{ .root_source_file = null, .target = target, .optimize = optimize, .link_libc = true });
+    mod.addCSourceFile(.{
         .file = .{ .src_path = .{ .owner = b, .sub_path = "src/math.c" } },
         // Here you can pass a comma separated list of C flags, e.g. `&.{"-std=c17", ...}`
         .flags = &.{},
     });
-    lib.addSystemIncludePath(.{ .cwd_relative = erts_include_dir });
+    mod.addSystemIncludePath(.{ .cwd_relative = erts_include_dir });
+
     // This is needed to avoid errors on MacOS when loading the NIF
+    const lib = b.addLibrary(.{ .name = "math", .linkage = .dynamic, .root_module = mod });
     lib.linker_allow_shlib_undefined = true;
 
     // Do this so `lib` doesn't get prepended to the lib name, and `.so` is used

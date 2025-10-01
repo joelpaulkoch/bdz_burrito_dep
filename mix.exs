@@ -9,7 +9,8 @@ defmodule BdzBurritoDep.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       compilers: [:build_dot_zig] ++ Mix.compilers(),
-      zig_target: System.get_env("MIX_TARGET") || :host
+      zig_target: System.get_env("MIX_TARGET") || :host,
+      install_zig: false
     ]
   end
 
