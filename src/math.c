@@ -3,20 +3,24 @@
 
 static ERL_NIF_TERM sum(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    // TODO: implement NIF
-    return enif_raise_exception(env, enif_make_atom(env, "not_implemented"));
-}
+    int x;
+    if(!enif_get_int(env, argv[0], &x)){
+        return enif_make_badarg(env);
+    }
 
-static ERL_NIF_TERM multiply(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
-{
-    // TODO: implement NIF
-    return enif_raise_exception(env, enif_make_atom(env, "not_implemented"));
+    int y;
+    if(!enif_get_int(env, argv[1], &y)){
+        return enif_make_badarg(env);
+    }
+
+    int result = x + y;
+
+    return enif_make_int(env, result);
 }
 
 static ErlNifFunc nif_funcs[] =
 {
-    {"sum", 2, sum},
-    {"multiply", 2, multiply},
+    {"sum", 2, sum}
 };
 
 ERL_NIF_INIT(Elixir.BdzBurritoDep.Math, nif_funcs, NULL, NULL, NULL, NULL)

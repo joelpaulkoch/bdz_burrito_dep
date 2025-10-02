@@ -11,8 +11,4 @@ defmodule BdzBurritoDep.Math do
   def sum(_, _) do
     :erlang.nif_error(:nif_not_loaded)
   end
-
-  def multiply(_, _) do
-    :erlang.nif_error(:nif_not_loaded)
-  end
 end

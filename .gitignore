@@ -21,3 +21,6 @@ bdz_burrito_dep-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.zig-cache
+zig-out
