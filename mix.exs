@@ -24,7 +24,7 @@ defmodule BdzBurritoDep.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:build_dot_zig, github: "joelpaulkoch/build_dot_zig", branch: "burrito", runtime: false}
+      {:build_dot_zig, "~> 0.6", runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
